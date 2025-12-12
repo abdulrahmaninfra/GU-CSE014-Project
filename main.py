@@ -1,4 +1,4 @@
-user_data = [ # Nested List,["Account Number","User PIN","Balance","Name"]
+user_data = [ # Nested List,["Account Number","User PIN","Balance","Name","is Admin"]
     ["101","1111",4000,"Ahmed",False],
     ["102","2222",2000,"AbdelRahman",True],
     ["103","3333",2000,"Zeyad",False],
@@ -8,12 +8,12 @@ user_data = [ # Nested List,["Account Number","User PIN","Balance","Name"]
 
 
 def login(): # take account number and pin as input from user
-    account_num = input("Enter your account number")
+    account_num = input("Enter your account number: ")
     pin = input("enter your PIN: ")
-    for user in user_data:
-        if user[0] == account_num and user[1] == pin:
-            print(f"Welcome Back. {user[3]}")
-            return user
+    for current_user in user_data:
+        if current_user[0] == account_num and current_user[1] == pin:
+            print(f"Welcome Back. {current_user[3]}")
+            return current_user
     print("Invalid account number or PIN")
     return None
 
@@ -56,23 +56,28 @@ def admin(current_user): # Add users and Manage theres pin and balance
 
         elif admin_choice == "2":
             user_change_pin= input("enter the user's account number: ")
+            found = False
             for user in user_data:
                 if user_change_pin == user[0]:
                     user_new_pin = input("enter your new pin: ")
                     user[1] = user_new_pin
                     print(f"the new pin is: {user_new_pin} ")
-
+                    found = True
+                    break
+            if not found:
+                print("error: user not found")
         elif admin_choice == "3":
             user_change_balance= input("enter the user's account number: ")
+            found = False
             for user in user_data:
                 if user_change_balance == user[0]:
-                    user_new_balance = input("enter your balance ")
+                    user_new_balance = float(input("enter your balance "))
                     user[2] = user_new_balance
                     print(f"your new balance is: {user_new_balance}")
-
-            else:
-                print("invalid input")
-                        
+                    found = True
+                    break
+            if not found:
+                print("error: user not found")
                 
 
 
@@ -86,7 +91,7 @@ def main(): # Run Code all in one
 
             if active_user[4] == True:
                 admin(active_user)
-                
+
             else:
                 financial(active_user)
 main()
