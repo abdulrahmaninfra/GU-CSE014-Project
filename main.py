@@ -29,6 +29,15 @@ def financial(current_user): # Withdraw and Deposit
         else:
             print("No enough balance!")
 
-def ShowBalance_ChangePIN(): # Show User Balance
+def ShowBalance_ChangePIN(current_user): # Show User Balance
+    print("1. Show Balance")
+    print("2. Change PIN")
+    choice = input("Select:")
+    if choice == "1":
+        print(f"Your Balance is {current_user[3]}")
+    elif choice == "2":
+        changed_pin = input("Please enter your new PIN: ")
+        current_user[2] = changed_pin
+        print("PIN Changed Successfully!!")
 def admin(): # Add users and Manage theres pin and balance
 def main(): # Run Code all in one
