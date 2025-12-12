@@ -39,5 +39,17 @@ def ShowBalance_ChangePIN(current_user): # Show User Balance
         changed_pin = input("Please enter your new PIN: ")
         current_user[2] = changed_pin
         print("PIN Changed Successfully!!")
-def admin(): # Add users and Manage theres pin and balance
+def admin():# Add users and Manage theres pin and balance
+    for user in user_data:
+        if user[4] == True:
+            print("1. Add user")
+            print("2. manage pin")
+            print("3. manage balance")
+            admin_choice = input("enter your choice:")
+            if admin_choice == "1":
+                new_user_account_number= input("the new account number: ")
+                new_user_pin = input("enter your pin: ")
+                new_user_balance = input("their balance: ")
+                new_user_name = input("enter their name: ")
+                user_data.append([new_user_account_number , new_user_pin , new_user_balance , new_user_name , False])
 def main(): # Run Code all in one
