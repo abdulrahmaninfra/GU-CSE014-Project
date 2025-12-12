@@ -53,4 +53,11 @@ def admin():# Add users and Manage theres pin and balance
                 new_user_balance = input("their balance: ")
                 new_user_name = input("enter their name: ")
                 user_data.append([new_user_account_number , new_user_pin , new_user_balance , new_user_name , False])
+            elif admin_choice == "2":
+                user_change_pin= input("enter the user's account number: ")
+                for user in user_data:
+                    if user_change_pin == user_data[0]:
+                        user_new_pin = input("enter your new pin: ")
+                        user_data.remove(1)
+                        user_data.insert(1, user_new_pin)
 def main(): # Run Code all in one
