@@ -34,10 +34,10 @@ def ShowBalance_ChangePIN(current_user): # Show User Balance
     print("2. Change PIN")
     choice = input("Select:")
     if choice == "1":
-        print(f"Your Balance is {current_user[3]}")
+        print(f"Your Balance is {current_user[2]}")
     elif choice == "2":
         changed_pin = input("Please enter your new PIN: ")
-        current_user[2] = changed_pin
+        current_user[1] = changed_pin
         print("PIN Changed Successfully!!")
 def admin():# Add users and Manage theres pin and balance
     for user in user_data:
