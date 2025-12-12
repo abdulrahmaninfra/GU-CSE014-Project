@@ -13,8 +13,9 @@ def login(): # take account number and pin as input from user
         if user[0] == account_num and user[1] == pin:
             print(f"Welcome Back. {user[3]}")
             return user
-    print("Login failed")
-    return None
+        else:
+            print("Login failed")
+            return None
 
 def financial(current_user): # Withdraw and Deposit
     print("1. Deposit")
