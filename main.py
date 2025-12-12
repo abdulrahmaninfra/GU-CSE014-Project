@@ -10,7 +10,8 @@ def login(): # take account number and pin as input from user
     account_num = input("Enter your account number")
     pin = input("enter your PIN: ")
     for user in user_data:
-        if user_account_number == account_num and user_pin == pin:
+        if user[0] == account_num and user[1] == pin:
+            print(f"Welcome Back. {user[3]}")
             return True
     return False
 
