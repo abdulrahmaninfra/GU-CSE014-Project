@@ -4,6 +4,7 @@ user_data = [ # Nested List,["Account Number","User PIN","Balance","Name"]
     ["103","3333",2000,"Zeyad"],
     ["104","4444",2000,"Moaz"],
     ["105","5555",3000,"Mohamed"],
+    ["admin","admin",0,"admin"],
 ]
 
 def login(): # take account number and pin as input from user
