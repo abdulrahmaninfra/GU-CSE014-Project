@@ -60,4 +60,14 @@ def admin():# Add users and Manage theres pin and balance
                         user_new_pin = input("enter your new pin: ")
                         user_data.remove(1)
                         user_data.insert(1, user_new_pin)
+            elif admin_choice == "3":
+                user_change_balance= input("enter the user's account number: ")
+                for user in user_data:
+                    if user_change_balance == user_data[0]:
+                        user_new_balance = input("enter your balance ")
+                        user_data.remove(2)
+                        new_balance = user_data.insert(2, user_new_balance)
+                        print(f"your new balance is: {new_balance}")
+            else:
+                print("invalid input")
 def main(): # Run Code all in one
