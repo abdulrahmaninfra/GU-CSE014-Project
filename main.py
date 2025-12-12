@@ -23,7 +23,7 @@ def financial(current_user): # Withdraw and Deposit
         amount= float(input("Enter a amount to Deposit: "))
         current_user[2] += amount
     elif choice == "2":
-        if amount <= user[2]:
+        if amount <= current_user[2]:
             current_user[2] -= amount
             print(f"Withdrawal of {amount} successful. Remaining: {current_user[2]}")
         else:
