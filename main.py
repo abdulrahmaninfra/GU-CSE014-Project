@@ -14,7 +14,7 @@ def login(): # take account number and pin as input from user
             print(f"Welcome Back. {user[3]}")
             return user
         else:
-            print("Login failed")
+            print("Invalid account number or PIN")
             return None
 
 def financial(current_user): # Withdraw and Deposit
