@@ -60,12 +60,12 @@ def check_balance(current_user):  # Check Balance Function
         print(f"Your current balance is: {current_user[balance]}")
 
 def financial_menu(current_user):  # Combine each of the following functions for financial operations (Deposit, Withdraw, Transfer, Check Balance)
-    print("1. Deposit")
-    print("2. Withdraw")
-    print("3. Transfer")
-    print("4. Check Balance")
-    print("5. Exit")
     while True:
+        print("1. Deposit")
+        print("2. Withdraw")
+        print("3. Transfer")
+        print("4. Check Balance")
+        print("5. Exit")
         choice = input("Choose an option: ").strip()
         if choice == "1":
             deposit(current_user)
@@ -77,9 +77,10 @@ def financial_menu(current_user):  # Combine each of the following functions for
             check_balance(current_user)
         elif choice == "5":
             print("you have exited.")
+            break
         else:
             print("Invalid choice.")
-            break
+            return
 
 def add_user():  # Add User Function
     new_user_account_number = input("the new account number: ").strip()
@@ -124,12 +125,12 @@ def manage_balance():  # Manage Balance
             print("error: user not found")
 
 def admin_menu(current_user):  # Add users and Manage theres pin and balance
-    print("1. Add user")
-    print("2. Manage pin")
-    print("3. Manage balance")
-    print("4. Exit")
-    
     while True:
+        print("1. Add user")
+        print("2. Manage pin")
+        print("3. Manage balance")
+        print("4. Exit")
+
         admin_choice = input("Enter your choice: ").strip()
         if admin_choice == "1":
             add_user()
