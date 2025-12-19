@@ -63,9 +63,9 @@ def check_balance(current_user):  # Check Balance Function
 
 def financial_menu(current_user):  # Combine each of the following functions for financial operations (Deposit, Withdraw, Transfer, Check Balance)
     while True:
-        print(f"\n{'='*20}")
-        print(f"MAIN MENU: {current_user[name]}")
-        print(f"\n{'='*20}")
+        print(f"{'='*(23+len(current_user[name])+2)}")
+        print(f"MAIN MENU: Welcome Back {current_user[name]}")
+        print(f"{'='*(23+len(current_user[name])+2)}")
         print("1. Deposit")
         print("2. Withdraw")
         print("3. Transfer")
@@ -131,9 +131,9 @@ def manage_balance():  # Manage Balance
 
 def admin_menu(current_user):  # Add users and Manage theres pin and balance
     while True:
-        print(f"\n{'='*20}")
-        print(f"ADMIN MENU: {current_user[name]}")
-        print(f"\n{'='*20}")
+        print(f"{'='*(26+len(current_user[name])+2)}")
+        print(f"ADMIN MENU: Welcome Back {current_user[name]}")
+        print(f"{'='*(26+len(current_user[name])+2)}")
         print("1. Add user")
         print("2. Manage pin")
         print("3. Manage balance")
