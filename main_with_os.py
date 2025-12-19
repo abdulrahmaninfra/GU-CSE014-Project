@@ -49,21 +49,23 @@ def withdraw(current_user):  # Withdraw Function
         else:
             print("No enough balance!")
 
+
 def transfer(current_user):  # Transfer Function
         target_account = input("Enter the account number want to transfer to: ").strip()
         amount = float(input("Enter amount to Transfer: ").strip())
         if amount <= 0:
             print("Invalid amount. Please enter a positive value.")
             return
+        if target_account == current_user[acc_number]:
+            print("You cannot transfer to your own account!")
+            return
         for user in user_data:
             if target_account == user[acc_number]:
                 if amount <= current_user[balance]:
                     current_user[balance] -= amount
                     user[balance] += amount
-                    clear()
                     print(f"\nTransfer of {amount} to {user[name]} successful. Your Remaining Balance: {current_user[balance]}")
                 else:
-                    clear()
                     print("No enough balance!")
 
 def check_balance(current_user):  # Check Balance Function
