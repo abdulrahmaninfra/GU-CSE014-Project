@@ -153,7 +153,9 @@ def admin_menu(current_user):  # Add users and Manage theres pin and balance
 
 def main():
     while True:
-        print(f"\n{'*'*30}\n WELCOME TO GALALA BANK\n{'*'*30}")
+        print(f"\n{'='*20}")
+        print("WELCOME TO GALALA BANK")
+        print(f"\n{'='*20}")
         active_user = login()
 
         if active_user:
