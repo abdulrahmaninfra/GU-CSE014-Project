@@ -74,6 +74,12 @@ def change_pin(current_user):
         print("the pin doesn't match")
 
 
+def maxiumim_withdraw(current_user, amount):
+    if amount < 5000:
+        return
+    else:
+        print("the max limit is 5000")
+
 def export_all_users():
     with open("all_users_accounts","w") as file:
         file.write("account num, name, balance")
