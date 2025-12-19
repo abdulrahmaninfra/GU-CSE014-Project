@@ -46,6 +46,9 @@ def transfer(current_user):  # Transfer Function
         if amount <= 0:
             print("Invalid amount. Please enter a positive value.")
             return
+        if target_account == current_user[acc_number]:
+            print("You cannot transfer to your own account!")
+            return
         for user in user_data:
             if target_account == user[acc_number]:
                 if amount <= current_user[balance]:
