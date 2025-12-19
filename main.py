@@ -60,6 +60,11 @@ def export_user(current_user):
         file.write(f"{current_user[0]},{current_user[3]},{current_user[2]}")
 
 
+def log_action(acc_num, action, amount):
+    with open ("receipt.txt", "a") as file:
+        file.write(f"Acc: {acc_num} has {action} with the amount: {str(amount)}")
+
+
 def export_all_users():
     with open("all_users_accounts","w") as file:
         file.write("account num, name, balance")
