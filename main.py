@@ -64,6 +64,15 @@ def log_action(acc_num, action, amount):
     with open ("receipt.txt", "a") as file:
         file.write(f"Acc: {acc_num} has {action} with the amount: {str(amount)}")
 
+def change_pin(current_user):
+    new_pin = input("enter the new pin: ")
+    confirm_pin = input("confirm the new pin: ")
+    if new_pin == confirm_pin:
+        current_user[1] = new_pin
+        print(f"the new pin is: {current_user[1]}")
+    else:
+        print("the pin doesn't match")
+
 
 def export_all_users():
     with open("all_users_accounts","w") as file:
