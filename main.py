@@ -59,7 +59,7 @@ def transfer(current_user):  # Transfer Function
 def check_balance(current_user):  # Check Balance Function
         print(f"Your current balance is: {current_user[balance]}")
 
-def financial(current_user):  # Combine each of the following functions for financial operations (Deposit, Withdraw, Transfer, Check Balance)
+def financial_menu(current_user):  # Combine each of the following functions for financial operations (Deposit, Withdraw, Transfer, Check Balance)
     print("1. Deposit")
     print("2. Withdraw")
     print("3. Transfer")
@@ -123,10 +123,11 @@ def manage_balance():  # Manage Balance
         if not found:
             print("error: user not found")
 
-def admin(current_user):  # Add users and Manage theres pin and balance
+def admin_menu(current_user):  # Add users and Manage theres pin and balance
     print("1. Add user")
     print("2. Manage pin")
     print("3. Manage balance")
+    print("4. Exit")
 
     admin_choice = input("Enter your choice: ").strip()
 
@@ -136,17 +137,24 @@ def admin(current_user):  # Add users and Manage theres pin and balance
         manage_pin()
     elif admin_choice == "3":
         manage_balance()
-
-def main():  # Run Code all in one
-    while True:
-        active_user = login()
-
-        if active_user:
-            if active_user[is_admin] == True:
-                admin(active_user)
+    elif admin_choice == "4":
+        print("you have exited.")
+    else:
+        print("Invalid choice.")
+        return
     
-            else:
-                financial(active_user)
 
+def main(): # Main Function
+    while True:
+        user = login()
+        if user:
+            if user[is_admin]:
+                admin_menu(user)
+            else:
+                financial_menu(user)
+        else:
+            exit = input("Try again? (y/n): ").lower()
+            if exit != 'y':
+                break
 
 main()
