@@ -17,7 +17,6 @@ def login():  # take account number and pin as input from user
     pin = input("enter your PIN: ").strip()
     for current_user in user_data:
         if current_user[acc_number] == account_num and current_user[user_pin] == pin:
-            print(f"Welcome Back. {current_user[name]}")
             return current_user
     print("Invalid account number or PIN")
     return None
@@ -25,19 +24,19 @@ def login():  # take account number and pin as input from user
 def deposit(current_user):  # Deposit Function
         amount = float(input("Enter a amount to Deposit: ").strip())
         if amount <= 0:
-            print("Invalid amount. Please enter a positive value.")
+            print("\nInvalid amount. Please enter a positive value.")
             return
         current_user[balance] += amount
-        print(f"New Balance: {current_user[balance]}")
+        print(f"\nNew Balance: {current_user[balance]}")
         
 def withdraw(current_user):  # Withdraw Function
         amount = float(input("Enter amount to Withdraw: ").strip())
         if amount <= 0:
-            print("Invalid amount. Please enter a positive value.")
+            print("\nInvalid amount. Please enter a positive value.")
             return
         if amount <= current_user[balance]:
             current_user[balance] -= amount
-            print(f"Withdrawal of {amount} successful. Remaining: {current_user[balance]}")
+            print(f"\nWithdrawal of {amount} successful. Remaining: {current_user[balance]}")
         else:
             print("No enough balance!")
 
@@ -52,21 +51,24 @@ def transfer(current_user):  # Transfer Function
                 if amount <= current_user[balance]:
                     current_user[balance] -= amount
                     user[balance] += amount
-                    print(f"Transfer of {amount} to {user[name]} successful. Your Remaining Balance: {current_user[balance]}")
+                    print(f"\nTransfer of {amount} to {user[name]} successful. Your Remaining Balance: {current_user[balance]}")
                 else:
                     print("No enough balance!")
 
 def check_balance(current_user):  # Check Balance Function
-        print(f"Your current balance is: {current_user[balance]}")
+        print(f"\nYour current balance is: {current_user[balance]}")
 
 def financial_menu(current_user):  # Combine each of the following functions for financial operations (Deposit, Withdraw, Transfer, Check Balance)
     while True:
+        print(f"\n{'='*20}")
+        print(f"MAIN MENU: {current_user[name]}")
+        print(f"\n{'='*20}")
         print("1. Deposit")
         print("2. Withdraw")
         print("3. Transfer")
         print("4. Check Balance")
         print("5. Exit")
-        choice = input("Choose an option: ").strip()
+        choice = input("\nChoose an option: ").strip()
         if choice == "1":
             deposit(current_user)
         elif choice == "2":
@@ -83,10 +85,10 @@ def financial_menu(current_user):  # Combine each of the following functions for
             return
 
 def add_user():  # Add User Function
-    new_user_account_number = input("the new account number: ").strip()
-    new_user_pin = input("enter your pin: ").strip()
-    new_user_balance = float(input("their balance: ").strip())
-    new_user_name = input("enter their name: ").strip()
+    new_user_account_number = input("\nthe new account number: ").strip()
+    new_user_pin = input("\nenter your pin: ").strip()
+    new_user_balance = float(input("\ntheir balance: ").strip())
+    new_user_name = input("\nenter their name: ").strip()
     user_data.append(
         [
             new_user_account_number,
@@ -99,13 +101,13 @@ def add_user():  # Add User Function
     print("User added successfully.")
 
 def manage_pin():  # Manage Pin 
-    user_change_pin = input("enter the user's account number: ")
+    user_change_pin = input("\nenter the user's account number: ")
     found = False
     for user in user_data:
         if user_change_pin == user[acc_number]:
-            user_new_pin = input("enter your new pin: ")
+            user_new_pin = input("\nenter your new pin: ")
             user[user_pin] = user_new_pin
-            print(f"the new pin is: {user_new_pin} ")
+            print(f"\nThe new pin is: {user_new_pin} ")
             found = True
             break
     if not found:
@@ -126,6 +128,9 @@ def manage_balance():  # Manage Balance
 
 def admin_menu(current_user):  # Add users and Manage theres pin and balance
     while True:
+        print(f"\n{'='*20}")
+        print(f"ADMIN MENU: {current_user[name]}")
+        print(f"\n{'='*20}")
         print("1. Add user")
         print("2. Manage pin")
         print("3. Manage balance")
