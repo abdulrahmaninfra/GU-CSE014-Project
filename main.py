@@ -54,6 +54,19 @@ def financial(current_user):  # Withdraw and Deposit
         print(f"Your Balance is: {current_user[2]}")
         
 
+def export_user(current_user):
+    with open("user_ATM_account", "w") as file:
+        file.write("account num, name, balance")
+        file.write(f"{current_user[0]},{current_user[3]},{current_user[2]}")
+
+
+def export_all_users():
+    with open("all_users_accounts","w") as file:
+        file.write("account num, name, balance")
+        for user in user_data:
+            file.write(f"{user[0]},{user[3]},{user[2]}")
+
+
 
 def admin(current_user):  # Add users and Manage theres pin and balance
     if current_user[4] == False:
