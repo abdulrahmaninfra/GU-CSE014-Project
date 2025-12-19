@@ -5,7 +5,7 @@ user_data = [  # 2D List "Nested List" ["Account Number","User PIN","Balance","N
     ["101", "1111", 4000, "Ahmed", False],
     ["102", "2222", 2000, "AbdelRahman", False],
     ["103", "3333", 2000, "Zeyad", False],
-    ["104", "4444", 2000, "Moaz", True],
+    ["104", "4444", 2000, "Moaz", False],
     ["105", "5555", 3000, "Mohamed", False],
     ["999", "0000", 0, "Admin", True]
 ]
@@ -125,6 +125,7 @@ def financial_menu(current_user):  # Combine each of the following functions for
             print("Invalid choice.")
             return
         input("Press Enter to continue...")
+
 def add_user():  # Add User Function
     new_user_account_number = input("\nThe new account number: ").strip()
     for user in user_data:
@@ -154,28 +155,30 @@ def manage_pin():  # Manage Pin
             user_new_pin = input("\nEnter the new PIN: ")
             user[user_pin] = user_new_pin
             save_user_data()
-            print(f"\nThe new pin is: {user_new_pin} ")
+            print(f"\nThe new PIN is: {user_new_pin} ")
             found = True
             break
     if not found:
         print("error: user not found")
 
 def manage_balance():  # Manage Balance
-        user_change_balance = input("enter the user's account number: ")
+        user_change_balance = input("\nEnter the user's account number: ")
         found = False
         for user in user_data:
             if user_change_balance == user[acc_number]:
-                user_new_balance = float(input("enter your balance "))
+                user_new_balance = float(input("\nEnter the new balance: "))
                 user[balance] = user_new_balance
                 save_user_data()
-                print(f"your new balance is: {user_new_balance}")
+                print(f"Your new balance is: {user_new_balance}")
                 found = True
                 break
         if not found:
             print("error: user not found")
+
 def view_all_users():
     for user in user_data:
         print(f"Account Number: {user[acc_number]}, Name: {user[name]}, Balance: {user[balance]}, Is Admin: {user[is_admin]}")
+
 def admin_menu(current_user):  # Add users and Manage theres pin and 
     while True:
         clear()
@@ -207,7 +210,7 @@ def admin_menu(current_user):  # Add users and Manage theres pin and
         input("Press Enter to continue...")
 
 
-def main():
+def main(): # Combine everything together
     load_user_data()
     while True:
         clear()
@@ -224,7 +227,7 @@ def main():
         else:
             retry = input("Try again? (y/n): ").lower().strip()
             if retry != 'y':
-                print("System shutting down. Goodbye!")
+                print("Goodbye!")
                 break
 
 main()
