@@ -6,19 +6,60 @@ user_data = [  # Nested List,["Account Number","User PIN","Balance","Name","is A
     ["105", "5555", 3000, "Mohamed", False],
 ]
 
+acc_number = 0
+user_pin = 1
+balance = 2
+name = 3
+is_admin = 4
 
 def login():  # take account number and pin as input from user
     account_num = input("Enter your account number: ")
     pin = input("enter your PIN: ")
     for current_user in user_data:
-        if current_user[0] == account_num and current_user[1] == pin:
-            print(f"Welcome Back. {current_user[3]}")
+        if current_user[acc_number] == account_num and current_user[user_pin] == pin:
+            print(f"Welcome Back. {current_user[name]}")
             return current_user
     print("Invalid account number or PIN")
     return None
 
+def deposit(current_user):  # Deposit Function
+        amount = float(input("Enter a amount to Deposit: "))
+        if amount <= 0:
+            print("Invalid amount. Please enter a positive value.")
+            return
+        current_user[balance] += amount
+        print(f"New Balance: {current_user[balance]}")
+        
+def withdraw(current_user):  # Withdraw Function
+        amount = float(input("Enter amount to Withdraw: "))
+        if amount <= 0:
+            print("Invalid amount. Please enter a positive value.")
+            return
+        if amount <= current_user[balance]:
+            current_user[balance] -= amount
+            print(f"Withdrawal of {amount} successful. Remaining: {current_user[balance]}")
+        else:
+            print("No enough balance!")
 
-def financial(current_user):  # Withdraw and Deposit
+def transfer(current_user):  # Transfer Function
+        target_account = input("Enter the account number want to transfer to: ")
+        amount = float(input("Enter amount to Transfer: "))
+        if amount <= 0:
+            print("Invalid amount. Please enter a positive value.")
+            return
+        for user in user_data:
+            if target_account == user[acc_number]:
+                if amount <= current_user[balance]:
+                    current_user[balance] -= amount
+                    user[balance] += amount
+                    print(f"Transfer of {amount} to {user[name]} successful. Your Remaining Balance: {current_user[balance]}")
+                else:
+                    print("No enough balance!")
+
+def check_balance(current_user):  # Check Balance Function
+        print(f"Your current balance is: {current_user[balance]}")
+
+def financial(current_user):  # Combine each of the following functions for financial operations (Deposit, Withdraw, Transfer, Check Balance)
     print("1. Deposit")
     print("2. Withdraw")
     print("3. Transfer")
@@ -26,50 +67,17 @@ def financial(current_user):  # Withdraw and Deposit
     choice = input("Select:")
 
     if choice == "1":
-        amount = float(input("Enter a amount to Deposit: "))
-        current_user[2] += amount
-        print(f"New Balance: {current_user[2]}")
-
+        deposit(current_user)
     elif choice == "2":
-        amount = float(input("Enter amount to Withdraw: "))
-
-        if amount <= current_user[2]:
-            current_user[2] -= amount
-            print(f"Withdrawal of {amount} successful. Remaining: {current_user[2]}")
-        else:
-            print("No enough balance!")
+        withdraw(current_user)
     elif choice == "3":
-        target_account = input("Enter the account number want to transfer to: ")
-        amount = float(input("Enter amount to Transfer: "))
-        for user in user_data:
-            if target_account == user[0]:
-                if amount <= current_user[2]:
-                    current_user[2] -= amount
-                    user[2] += amount
-                    print(f"Transfer of {amount} to {user[3]} successful. Your Remaining Balance: {current_user[2]}")
-                else:
-                    print("No enough balance!")
-
+        transfer(current_user)
     elif choice == "4":
-        print(f"Your Balance is: {current_user[2]}")
-        
-
-def export_user(current_user):
-    with open("user_ATM_account", "w") as file:
-        file.write("account num, name, balance")
-        file.write(f"{current_user[0]},{current_user[3]},{current_user[2]}")
-
-
-def export_all_users():
-    with open("all_users_accounts","w") as file:
-        file.write("account num, name, balance")
-        for user in user_data:
-            file.write(f"{user[0]},{user[3]},{user[2]}")
-
+        check_balance(current_user)
 
 
 def admin(current_user):  # Add users and Manage theres pin and balance
-    if current_user[4] == False:
+    if current_user[is_admin] == False:
         print("Access Denied: Admin privileges required.")
         return
     print("1. Add user")
@@ -98,9 +106,9 @@ def admin(current_user):  # Add users and Manage theres pin and balance
         user_change_pin = input("enter the user's account number: ")
         found = False
         for user in user_data:
-            if user_change_pin == user[0]:
+            if user_change_pin == user[acc_number]:
                 user_new_pin = input("enter your new pin: ")
-                user[1] = user_new_pin
+                user[user_pin] = user_new_pin
                 print(f"the new pin is: {user_new_pin} ")
                 found = True
                 break
@@ -110,9 +118,9 @@ def admin(current_user):  # Add users and Manage theres pin and balance
         user_change_balance = input("enter the user's account number: ")
         found = False
         for user in user_data:
-            if user_change_balance == user[0]:
+            if user_change_balance == user[acc_number]:
                 user_new_balance = float(input("enter your balance "))
-                user[2] = user_new_balance
+                user[balance] = user_new_balance
                 print(f"your new balance is: {user_new_balance}")
                 found = True
                 break
@@ -125,9 +133,9 @@ def main():  # Run Code all in one
         active_user = login()
 
         if active_user:
-            if active_user[4] == True:
+            if active_user[is_admin] == True:
                 admin(active_user)
-
+    
             else:
                 financial(active_user)
 
