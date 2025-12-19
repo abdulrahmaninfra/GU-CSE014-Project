@@ -65,21 +65,21 @@ def financial_menu(current_user):  # Combine each of the following functions for
     print("3. Transfer")
     print("4. Check Balance")
     print("5. Exit")
-    choice = input("Select:").strip()
-
-    if choice == "1":
-        deposit(current_user)
-    elif choice == "2":
-        withdraw(current_user)
-    elif choice == "3":
-        transfer(current_user)
-    elif choice == "4":
-        check_balance(current_user)
-    elif choice == "5":
-        print("you have exited.")
-    else:
-        print("Invalid choice.")
-        return
+    while True:
+        choice = input("Choose an option: ").strip()
+        if choice == "1":
+            deposit(current_user)
+        elif choice == "2":
+            withdraw(current_user)
+        elif choice == "3":
+            transfer(current_user)
+        elif choice == "4":
+            check_balance(current_user)
+        elif choice == "5":
+            print("you have exited.")
+        else:
+            print("Invalid choice.")
+            break
 
 def add_user():  # Add User Function
     new_user_account_number = input("the new account number: ").strip()
@@ -128,33 +128,37 @@ def admin_menu(current_user):  # Add users and Manage theres pin and balance
     print("2. Manage pin")
     print("3. Manage balance")
     print("4. Exit")
-
-    admin_choice = input("Enter your choice: ").strip()
-
-    if admin_choice == "1":
-        add_user()
-    elif admin_choice == "2":
-        manage_pin()
-    elif admin_choice == "3":
-        manage_balance()
-    elif admin_choice == "4":
-        print("you have exited.")
-    else:
-        print("Invalid choice.")
-        return
     
-
-def main(): # Main Function
     while True:
-        user = login()
-        if user:
-            if user[is_admin]:
-                admin_menu(user)
-            else:
-                financial_menu(user)
+        admin_choice = input("Enter your choice: ").strip()
+        if admin_choice == "1":
+            add_user()
+        elif admin_choice == "2":
+            manage_pin()
+        elif admin_choice == "3":
+            manage_balance()
+        elif admin_choice == "4":
+            print("you have exited.")
+            break
         else:
-            exit = input("Try again? (y/n): ").lower()
-            if exit != 'y':
+            print("Invalid choice.")
+            return
+
+
+def main():
+    while True:
+        print(f"\n{'*'*30}\n WELCOME TO GALALA BANK\n{'*'*30}")
+        active_user = login()
+
+        if active_user:
+            if active_user[is_admin]:
+                admin_menu(active_user)
+            else:
+                financial_menu(active_user)
+        else:
+            retry = input("Try again? (y/n): ").lower().strip()
+            if retry != 'y':
+                print("System shutting down. Goodbye!")
                 break
 
 main()
