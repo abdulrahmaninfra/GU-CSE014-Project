@@ -13,8 +13,8 @@ name = 3
 is_admin = 4
 
 def login():  # take account number and pin as input from user
-    account_num = input("Enter your account number: ")
-    pin = input("enter your PIN: ")
+    account_num = input("Enter your account number: ").strip()
+    pin = input("enter your PIN: ").strip()
     for current_user in user_data:
         if current_user[acc_number] == account_num and current_user[user_pin] == pin:
             print(f"Welcome Back. {current_user[name]}")
@@ -23,7 +23,7 @@ def login():  # take account number and pin as input from user
     return None
 
 def deposit(current_user):  # Deposit Function
-        amount = float(input("Enter a amount to Deposit: "))
+        amount = float(input("Enter a amount to Deposit: ").strip())
         if amount <= 0:
             print("Invalid amount. Please enter a positive value.")
             return
@@ -31,7 +31,7 @@ def deposit(current_user):  # Deposit Function
         print(f"New Balance: {current_user[balance]}")
         
 def withdraw(current_user):  # Withdraw Function
-        amount = float(input("Enter amount to Withdraw: "))
+        amount = float(input("Enter amount to Withdraw: ").strip())
         if amount <= 0:
             print("Invalid amount. Please enter a positive value.")
             return
@@ -42,8 +42,8 @@ def withdraw(current_user):  # Withdraw Function
             print("No enough balance!")
 
 def transfer(current_user):  # Transfer Function
-        target_account = input("Enter the account number want to transfer to: ")
-        amount = float(input("Enter amount to Transfer: "))
+        target_account = input("Enter the account number want to transfer to: ").strip()
+        amount = float(input("Enter amount to Transfer: ").strip())
         if amount <= 0:
             print("Invalid amount. Please enter a positive value.")
             return
@@ -64,7 +64,8 @@ def financial(current_user):  # Combine each of the following functions for fina
     print("2. Withdraw")
     print("3. Transfer")
     print("4. Check Balance")
-    choice = input("Select:")
+    print("5. Exit")
+    choice = input("Select:").strip()
 
     if choice == "1":
         deposit(current_user)
@@ -74,47 +75,42 @@ def financial(current_user):  # Combine each of the following functions for fina
         transfer(current_user)
     elif choice == "4":
         check_balance(current_user)
-
-
-def admin(current_user):  # Add users and Manage theres pin and balance
-    if current_user[is_admin] == False:
-        print("Access Denied: Admin privileges required.")
+    elif choice == "5":
+        print("you have exited.")
+    else:
+        print("Invalid choice.")
         return
-    print("1. Add user")
-    print("2. manage pin")
-    print("3. manage balance")
 
-    admin_choice = input("enter your choice:")
+def add_user():  # Add User Function
+    new_user_account_number = input("the new account number: ").strip()
+    new_user_pin = input("enter your pin: ").strip()
+    new_user_balance = float(input("their balance: ").strip())
+    new_user_name = input("enter their name: ").strip()
+    user_data.append(
+        [
+            new_user_account_number,
+            new_user_pin,
+            new_user_balance,
+            new_user_name,
+            False,
+        ]
+    )
+    print("User added successfully.")
 
-    if admin_choice == "1":
-        new_user_account_number = input("the new account number: ")
-        new_user_pin = input("enter your pin: ")
-        new_user_balance = float(input("their balance: "))
-        new_user_name = input("enter their name: ")
-        user_data.append(
-            [
-                new_user_account_number,
-                new_user_pin,
-                new_user_balance,
-                new_user_name,
-                False,
-            ]
-        )
-        print("User added successfully.")
+def manage_pin():  # Manage Pin 
+    user_change_pin = input("enter the user's account number: ")
+    found = False
+    for user in user_data:
+        if user_change_pin == user[acc_number]:
+            user_new_pin = input("enter your new pin: ")
+            user[user_pin] = user_new_pin
+            print(f"the new pin is: {user_new_pin} ")
+            found = True
+            break
+    if not found:
+        print("error: user not found")
 
-    elif admin_choice == "2":
-        user_change_pin = input("enter the user's account number: ")
-        found = False
-        for user in user_data:
-            if user_change_pin == user[acc_number]:
-                user_new_pin = input("enter your new pin: ")
-                user[user_pin] = user_new_pin
-                print(f"the new pin is: {user_new_pin} ")
-                found = True
-                break
-        if not found:
-            print("error: user not found")
-    elif admin_choice == "3":
+def manage_balance():  # Manage Balance
         user_change_balance = input("enter the user's account number: ")
         found = False
         for user in user_data:
@@ -127,6 +123,19 @@ def admin(current_user):  # Add users and Manage theres pin and balance
         if not found:
             print("error: user not found")
 
+def admin(current_user):  # Add users and Manage theres pin and balance
+    print("1. Add user")
+    print("2. Manage pin")
+    print("3. Manage balance")
+
+    admin_choice = input("Enter your choice: ").strip()
+
+    if admin_choice == "1":
+        add_user()
+    elif admin_choice == "2":
+        manage_pin()
+    elif admin_choice == "3":
+        manage_balance()
 
 def main():  # Run Code all in one
     while True:
