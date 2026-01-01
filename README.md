@@ -1,4 +1,4 @@
-# 🏦 Alala Bank Management System
+# 🏦 Galala Bank Management System
 
 A **Python-based Command Line Interface (CLI) banking application** that simulates core banking operations such as authentication, transactions, and administrative management.
 The system features **persistent data storage using JSON**, ensuring user data remains intact across sessions.
