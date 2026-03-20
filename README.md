@@ -135,16 +135,3 @@ Admins can perform essential management tasks:
 
 The `clear()` function uses the `os` module to detect the operating system and clear the terminal screen.
 This provides a **clean, professional CLI experience** instead of cluttered scrolling output.
-
----
-
-## 🌟 Summary
-
-The **Alala Bank Management System** is a simple yet robust CLI banking application that demonstrates:
-
-* Authentication & RBAC
-* Transaction safety & validation
-* Persistent storage with JSON
-* Clean, user-friendly terminal interaction
-
-Perfect for **learning Python fundamentals**, **CLI application design**, and **basic data persistence concepts** 🚀
